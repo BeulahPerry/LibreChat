@@ -1,0 +1,14 @@
+version: 1.1.4
+cache: true
+endpoints:
+  custom:
+    - name: "OpenRouter"
+      apiKey: "${OPENROUTER_KEY}"
+      baseURL: "https://openrouter.ai/api/v1"
+      models:
+        default: ["x-ai/grok-3-mini-beta"]
+        fetch: true
+      titleConvo: true
+      titleModel: "google/gemini-2.0-flash-exp:free"
+      dropParams: ["stop"]
+      modelDisplayLabel: "OpenRouter"
