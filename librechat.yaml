@@ -3,11 +3,6 @@ secureImageLinks: true
 fileStrategy: "s3"
 
 
-x-shared-endpoint-config: &sharedEndpointConfig
-  titleConvo: true
-  titleModel: "google/gemini-2.0-flash-exp:free"
-
-
 endpoints:
   custom:
     - name: "OpenRouter"
@@ -20,7 +15,9 @@ endpoints:
       dropParams:
         - "stop"
       modelDisplayLabel: "OpenRouter - Pay"
-      <<: *sharedEndpointConfig
+      <<: &sharedEndpointConfig
+        titleConvo: true
+        titleModel: "google/gemini-2.0-flash-exp:free"
     - name: "Deepseek"
       apiKey: "${DEEPSEEK_API_KEY}"
       baseURL: "https://api.deepseek.com/v1"
