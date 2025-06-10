@@ -1,14 +1,124 @@
-version: 1.1.4
-cache: true
+version: 1.2.1
+secureImageLinks: true
+fileStrategy: "s3"
+
+
+x-shared-endpoint-config: &sharedEndpointConfig
+  titleConvo: true
+  titleModel: "google/gemini-2.0-flash-exp:free"
+
+
 endpoints:
   custom:
     - name: "OpenRouter"
       apiKey: "${OPENROUTER_KEY}"
       baseURL: "https://openrouter.ai/api/v1"
       models:
-        default: ["x-ai/grok-3-mini-beta"]
+        default:
+          - "x-ai/grok-3-beta"
         fetch: true
-      titleConvo: true
-      titleModel: "google/gemini-2.0-flash-exp:free"
-      dropParams: ["stop"]
-      modelDisplayLabel: "OpenRouter"
+      dropParams:
+        - "stop"
+      modelDisplayLabel: "OpenRouter - Pay"
+      <<: *sharedEndpointConfig
+    - name: "Deepseek"
+      apiKey: "${DEEPSEEK_API_KEY}"
+      baseURL: "https://api.deepseek.com/v1"
+      models:
+        default:
+          - "deepseek-reasoner"
+        fetch: true
+      modelDisplayLabel: "DeepSeek - Free"
+      <<: *sharedEndpointConfig
+    - name: "Fireworks"
+      apiKey: "${FIREWORKS_API_KEY}"
+      baseURL: "https://api.fireworks.ai/inference/v1"
+      models:
+        default:
+          - "accounts/fireworks/models/llama4-maverick-instruct-basic"
+        fetch: true
+      dropParams:
+        - "user"
+      modelDisplayLabel: "Fireworks - Pay"
+      <<: *sharedEndpointConfig
+    - name: "Mistral"
+      apiKey: "${MISTRAL_API_KEY}"
+      baseURL: "https://api.mistral.ai/v1"
+      models:
+        default:
+          - "mistral-large-latest"
+        fetch: true
+      dropParams: # https://www.librechat.ai/docs/configuration/librechat_yaml/ai_endpoints/mistral 里说不用加stop，但是librechat.example.yaml里说要加
+       - "user"
+       - "frequency_penalty"
+       - "presence_penalty"
+      modelDisplayLabel: "Mistral - Free"
+      <<: *sharedEndpointConfig
+    - name: 'groq'
+      apiKey: '${GROQ_API_KEY}'
+      baseURL: 'https://api.groq.com/openai/v1/'
+      models:
+        default:
+          - "llama-3.3-70b-versatile"
+        fetch: true
+      modelDisplayLabel: "Groq - Free"
+      <<: *sharedEndpointConfig
+    - name: 'HuggingFace'
+      apiKey: '${HUGGINGFACE_TOKEN}'
+      baseURL: 'https://api-inference.huggingface.co/v1'
+      models:
+        default: 
+          - "meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+          - "meta-llama/Llama-3.3-70B-Instruct"
+          - "Groq/Llama-3-Groq-70B-Tool-Use"
+          - "google/gemma-3n-E4B-it-litert-preview"
+        fetch: true
+      dropParams:
+        - "top_p"
+      modelDisplayLabel: "Hugging Face - Pay"
+      <<: *sharedEndpointConfig
+    - name: "NeurochainAI"
+      apiKey: '${NeurochainAI_API_KEY}'
+      baseURL: "https://ncmb.neurochain.io/v1/"
+      models:
+        default:
+          - "Mistral-7B-OpenOrca-GPTQ"
+        fetch: true
+      iconURL: "https://raw.githubusercontent.com/LibreChat-AI/librechat-config-yaml/refs/heads/main/icons/NeurochainAI.png"
+      modelDisplayLabel: "Neurochain AI - Pay"
+      <<: *sharedEndpointConfig
+    - name: "cohere"
+      apiKey: "${COHERE_API_KEY}"
+      baseURL: "https://api.cohere.ai/v1"
+      models:
+        default:
+          - "command-a-03-2025"
+        fetch: true
+      dropParams:
+       - "stop"
+       - "user"
+       - "frequency_penalty"
+       - "presence_penalty"
+       - "temperature"
+       - "top_p"
+      modelDisplayLabel: "Cohere - Free"
+      <<: *sharedEndpointConfig
+    - name: "xai"
+      apiKey: "${XAI_API_KEY}"
+      baseURL: "https://api.x.ai/v1"
+      models:
+        default:
+         - "grok-3"
+        fetch: true
+      modelDisplayLabel: "xAI-Pay"
+
+
+
+
+# webSearch: # 先注释掉试试看UI是否会提示手动输入
+#   serperApiKey: "${SERPER_API_KEY}"
+#   firecrawlApiKey: "${FIRECRAWL_API_KEY}"
+#   firecrawlApiUrl: "${FIRECRAWL_API_URL}"
+#   jinaApiKey: "${JINA_API_KEY}"
+#   cohereApiKey: "${COHERE_API_KEY}"
+
