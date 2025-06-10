@@ -1,5 +1,5 @@
 services:
   api:
     volumes:
-      - ./librechat.yaml:/app/librechat.yaml
+      - ./librechat.yaml:/app/api/librechat.yaml
   
