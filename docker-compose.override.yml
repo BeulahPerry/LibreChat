@@ -1,5 +1,5 @@
-services:
-  api:
-    volumes:
-      - ./librechat.yaml:/app/api/librechat.yaml
+# services:
+#   api:
+#     volumes:
+#       - ./librechat.yaml:/app/librechat.yaml # Dockerfile 中包含一行 COPY --chown=node:node . . 。这行指令会将项目根目录下的所有文件（包括 librechat.yaml）复制到 Docker 容器内的 /app 目录，所以就不需要在这里单独设置了
   
