@@ -2,4 +2,5 @@ Render部署时：
 环境变量使用Secret Files会报错，只能用Environment Variables
 创建Environment Groups，项目链接到Environment Groups，.env有修改时可以删除Environment Groups并重新创建、链接，避免手动一个个删除环境变量键值对的麻烦
 将 !librechat.yaml 加到 .dockerignore 中，否则会报错 "error: Config file YAML format is invalid: ENOENT: no such file or directory, open '/app/librechat.yaml'"
-每次和LibreChat的官方代码库同步时librechat.yaml中的version需要改成 https://www.librechat.ai/changelog 中最新的
+每次和LibreChat的官方代码库同步时 librechat.yaml 中的 version 需要改成 https://www.librechat.ai/changelog 中最新的
+每隔几分钟就访问一次防止冷启动 https://cron-job.org
