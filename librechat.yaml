@@ -1,4 +1,4 @@
-version: 1.2.6
+version: 1.2.7
 secureImageLinks: true
 fileStrategy: "s3"
 
@@ -17,7 +17,9 @@ endpoints:
       modelDisplayLabel: "OpenRouter - Pay"
       <<: &sharedEndpointConfig
         titleConvo: true
-        titleModel: "google/gemini-2.0-flash-exp:free"
+        titleModel: 
+          endpoint: "OpenRouter"
+          model: "google/gemini-2.0-flash-exp:free"
     - name: "Deepseek"
       apiKey: "${DEEPSEEK_API_KEY}"
       baseURL: "https://api.deepseek.com/v1"
@@ -53,7 +55,7 @@ endpoints:
       <<: *sharedEndpointConfig
     - name: 'groq'
       apiKey: '${GROQ_API_KEY}'
-      baseURL: 'https://api.groq.com/openai/v1/'
+      baseURL: 'https://api.groq.com/openai/v1'
       models:
         default:
           - "llama-3.3-70b-versatile"
@@ -76,7 +78,7 @@ endpoints:
       <<: *sharedEndpointConfig
     - name: "NeurochainAI"
       apiKey: '${NeurochainAI_API_KEY}'
-      baseURL: "https://ncmb.neurochain.io/v1/"
+      baseURL: "https://ncmb.neurochain.io/v1"
       models:
         default:
           - "Mistral-7B-OpenOrca-GPTQ"
@@ -108,14 +110,14 @@ endpoints:
          - "grok-3"
         fetch: true
       modelDisplayLabel: "xAI-Pay"
+      <<: *sharedEndpointConfig
 
 
 
 
-# webSearch: # 先注释掉试试看UI是否会提示手动输入
-#   serperApiKey: "${SERPER_API_KEY}"
-#   firecrawlApiKey: "${FIRECRAWL_API_KEY}"
-#   firecrawlApiUrl: "${FIRECRAWL_API_URL}"
-#   jinaApiKey: "${JINA_API_KEY}"
-#   cohereApiKey: "${COHERE_API_KEY}"
+webSearch:
+  serperApiKey: "${SERPER_API_KEY}"
+  firecrawlApiKey: "${FIRECRAWL_API_KEY}"
+  jinaApiKey: "${JINA_API_KEY}"
+  cohereApiKey: "${COHERE_API_KEY}"
 
