@@ -10,14 +10,16 @@ endpoints:
       baseURL: "https://openrouter.ai/api/v1"
       models:
         default:
-          - "x-ai/grok-3-beta"
+          # - "x-ai/grok-3-beta"
+          - "meta-llama/llama-4-maverick:free"
         fetch: true
       dropParams:
         - "stop"
       modelDisplayLabel: "OpenRouter - Pay"
       <<: &sharedEndpointConfig
         titleConvo: true
-        titleModel: "google/gemini-2.0-flash-exp:free"
+        # titleModel: "google/gemini-2.0-flash-exp:free"
+        titleModel: "meta-llama/llama-4-maverick:free"
     - name: "Deepseek"
       apiKey: "${DEEPSEEK_API_KEY}"
       baseURL: "https://api.deepseek.com/v1"
