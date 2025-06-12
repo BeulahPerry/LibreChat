@@ -17,9 +17,7 @@ endpoints:
       modelDisplayLabel: "OpenRouter - Pay"
       <<: &sharedEndpointConfig
         titleConvo: true
-        titleModel: 
-          endpoint: "OpenRouter"
-          model: "google/gemini-2.0-flash-exp:free"
+        titleModel: "google/gemini-2.0-flash-exp:free"
     - name: "Deepseek"
       apiKey: "${DEEPSEEK_API_KEY}"
       baseURL: "https://api.deepseek.com/v1"
