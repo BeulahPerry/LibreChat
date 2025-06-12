@@ -1,4 +1,5 @@
 version: 1.2.7
+cache: true
 secureImageLinks: true
 fileStrategy: "s3"
 
@@ -16,10 +17,8 @@ endpoints:
       dropParams:
         - "stop"
       modelDisplayLabel: "OpenRouter - Pay"
-      <<: &sharedEndpointConfig
-        titleConvo: true
-        # titleModel: "google/gemini-2.0-flash-exp:free"
-        titleModel: "meta-llama/llama-4-maverick:free"
+      titleConvo: true
+      titleModel: "meta-llama/llama-4-maverick:free"
     - name: "Deepseek"
       apiKey: "${DEEPSEEK_API_KEY}"
       baseURL: "https://api.deepseek.com/v1"
@@ -28,7 +27,6 @@ endpoints:
           - "deepseek-reasoner"
         fetch: true
       modelDisplayLabel: "DeepSeek - Free"
-      <<: *sharedEndpointConfig
     - name: "Fireworks"
       apiKey: "${FIREWORKS_API_KEY}"
       baseURL: "https://api.fireworks.ai/inference/v1"
@@ -39,7 +37,6 @@ endpoints:
       dropParams:
         - "user"
       modelDisplayLabel: "Fireworks - Pay"
-      <<: *sharedEndpointConfig
     - name: "Mistral"
       apiKey: "${MISTRAL_API_KEY}"
       baseURL: "https://api.mistral.ai/v1"
@@ -52,7 +49,6 @@ endpoints:
        - "frequency_penalty"
        - "presence_penalty"
       modelDisplayLabel: "Mistral - Free"
-      <<: *sharedEndpointConfig
     - name: 'groq'
       apiKey: '${GROQ_API_KEY}'
       baseURL: 'https://api.groq.com/openai/v1'
@@ -61,7 +57,6 @@ endpoints:
           - "llama-3.3-70b-versatile"
         fetch: true
       modelDisplayLabel: "Groq - Free"
-      <<: *sharedEndpointConfig
     - name: 'HuggingFace'
       apiKey: '${HUGGINGFACE_TOKEN}'
       baseURL: 'https://api-inference.huggingface.co/v1'
@@ -75,7 +70,6 @@ endpoints:
       dropParams:
         - "top_p"
       modelDisplayLabel: "Hugging Face - Pay"
-      <<: *sharedEndpointConfig
     - name: "NeurochainAI"
       apiKey: '${NeurochainAI_API_KEY}'
       baseURL: "https://ncmb.neurochain.io/v1"
@@ -85,7 +79,6 @@ endpoints:
         fetch: true
       iconURL: "https://raw.githubusercontent.com/LibreChat-AI/librechat-config-yaml/refs/heads/main/icons/NeurochainAI.png"
       modelDisplayLabel: "Neurochain AI - Pay"
-      <<: *sharedEndpointConfig
     - name: "cohere"
       apiKey: "${COHERE_API_KEY}"
       baseURL: "https://api.cohere.ai/v1"
@@ -101,7 +94,6 @@ endpoints:
        - "temperature"
        - "top_p"
       modelDisplayLabel: "Cohere - Free"
-      <<: *sharedEndpointConfig
     - name: "xai"
       apiKey: "${XAI_API_KEY}"
       baseURL: "https://api.x.ai/v1"
@@ -110,7 +102,6 @@ endpoints:
          - "grok-3"
         fetch: true
       modelDisplayLabel: "xAI-Pay"
-      <<: *sharedEndpointConfig
 
 
 
