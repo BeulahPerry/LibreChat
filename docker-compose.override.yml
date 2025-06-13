@@ -1,5 +1,43 @@
+# Render部署
+services:
+  rag_api:
+    image: ghcr.io/danny-avila/librechat-rag-api-dev:latest # 使用 Hugging Face 做嵌入就要使用这个镜像否则报错
+
+
+
+# 本地部署
 # services:
+#   init-permissions: # docker默认用root权限在宿主机上创建目录，这个服务用当前用户在宿主机上创建目录，解决权限问题
+#     image: alpine:latest
+#     user: root
+#     volumes:
+#       - ./images:/app/client/public/images
+#       - ./uploads:/app/uploads
+#       - ./logs:/app/api/logs
+#       - ./data-node:/data/db
+#       - ./meili_data_v1.12:/meili_data
+#     command: >
+#       sh -c "
+#         echo 'Fixing volume permissions...' &&
+#         chown -R ${UID}:${GID} /app/client/public/images /app/uploads /app/api/logs /data/db /meili_data &&
+#         echo 'Permissions fixed.'
+#       "
+
 #   api:
 #     volumes:
-#       - ./librechat.yaml:/app/librechat.yaml # Dockerfile 中包含一行 COPY --chown=node:node . . 。这行指令会将项目根目录下的所有文件（包括 librechat.yaml）复制到 Docker 容器内的 /app 目录，所以就不需要在这里单独设置了
-  
+#       - ./librechat.yaml:/app/librechat.yaml # Dockerfile 中包含一行 COPY --chown=node:node . . 。这行指令会将项目根目录下的所有文件（包括 librechat.yaml）复制到 Docker 容器内的 /app 目录，所以就不需要在这里单独设置了（在render上确实是这样，但是本地部署时发现不这样）
+#     depends_on:
+#       init-permissions:
+#         condition: service_completed_successfully # 在宿主机上创建的目录的权限问题解决了再启动这个服务
+
+#   mongodb:
+#     depends_on:
+#       init-permissions:
+#         condition: service_completed_successfully # 在宿主机上创建的目录的权限问题解决了再启动这个服务
+
+#   meilisearch:
+#     depends_on:
+#       init-permissions:
+#         condition: service_completed_successfully # 在宿主机上创建的目录的权限问题解决了再启动这个服务
+#   rag_api:
+#     image: ghcr.io/danny-avila/librechat-rag-api-dev:latest # 使用 Hugging Face 做嵌入就要使用这个镜像否则报错
