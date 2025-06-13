@@ -7,8 +7,6 @@ services:
 
   rag_api:
     image: ghcr.io/danny-avila/librechat-rag-api-dev:latest # 使用 Hugging Face 做嵌入就要使用这个镜像否则报错
-    environment:
-      - RAG_API_URL=http://rag_api:8000
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 3s       # 每 3 秒检查一次
