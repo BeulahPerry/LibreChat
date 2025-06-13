@@ -7,7 +7,7 @@ services:
     ports:
       - "${PORT}:${PORT}"
     depends_on:
-      - mongodb
+      # - mongodb # mongodb暂时用不到所以注释掉
       - rag_api
     image: ghcr.io/danny-avila/librechat-dev:latest
     restart: always
@@ -27,14 +27,14 @@ services:
       - ./images:/app/client/public/images
       - ./uploads:/app/uploads
       - ./logs:/app/api/logs
-  mongodb:
-    container_name: chat-mongodb
-    image: mongo
-    restart: always
-    user: "${UID}:${GID}"
-    volumes:
-      - ./data-node:/data/db
-    command: mongod --noauth
+  # mongodb: # mongodb暂时用不到所以注释掉
+  #   container_name: chat-mongodb
+  #   image: mongo
+  #   restart: always
+  #   user: "${UID}:${GID}"
+  #   volumes:
+  #     - ./data-node:/data/db
+  #   command: mongod --noauth
   meilisearch:
     container_name: chat-meilisearch
     image: getmeili/meilisearch:v1.12.3

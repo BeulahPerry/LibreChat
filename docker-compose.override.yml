@@ -2,6 +2,17 @@
 services:
   rag_api:
     image: ghcr.io/danny-avila/librechat-rag-api-dev:latest # 使用 Hugging Face 做嵌入就要使用这个镜像否则报错
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 3s       # 每 3 秒检查一次
+      timeout: 5s         # 5 秒超时
+      retries: 10          # 重试 5 次
+      start_period: 40s   # 给予 40 秒的启动宽限期，以容纳模型加载时间
+
+  api:
+    depends_on:
+      rag_api:
+        condition: service_healthy # rag_api 服务处于 "healthy" 状态后再启动这个服务
 
 
 
@@ -29,11 +40,13 @@ services:
 #     depends_on:
 #       init-permissions:
 #         condition: service_completed_successfully # 在宿主机上创建的目录的权限问题解决了再启动这个服务
+#       rag_api:
+#         condition: service_healthy # rag_api 服务处于 "healthy" 状态后再启动这个服务
 
-#   mongodb:
-#     depends_on:
-#       init-permissions:
-#         condition: service_completed_successfully # 在宿主机上创建的目录的权限问题解决了再启动这个服务
+#   # mongodb:
+#   #   depends_on:
+#   #     init-permissions:
+#   #       condition: service_completed_successfully # 在宿主机上创建的目录的权限问题解决了再启动这个服务
 
 #   meilisearch:
 #     depends_on:
@@ -41,3 +54,9 @@ services:
 #         condition: service_completed_successfully # 在宿主机上创建的目录的权限问题解决了再启动这个服务
 #   rag_api:
 #     image: ghcr.io/danny-avila/librechat-rag-api-dev:latest # 使用 Hugging Face 做嵌入就要使用这个镜像否则报错
+#     healthcheck:
+#       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+#       interval: 3s       # 每 3 秒检查一次
+#       timeout: 5s         # 5 秒超时
+#       retries: 10          # 重试 5 次
+#       start_period: 40s   # 给予 40 秒的启动宽限期，以容纳模型加载时间

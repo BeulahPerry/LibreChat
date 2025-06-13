@@ -9,6 +9,7 @@ Render部署时：
 
 本地部署时：
 docker-compose.override.yml 中的 init-permissions 注意官方是否改了文件路径（例如“meili_data_v1.12”这种带版本号的或路径也可能变）
+更新指南： https://www.librechat.ai/docs/local/docker#update-librechat
 
 
 
@@ -17,3 +18,4 @@ docker-compose.override.yml 中的 init-permissions 注意官方是否改了文�
 共性问题：
 将 !librechat.yaml 加到 .dockerignore 中，否则会报错 "error: Config file YAML format is invalid: ENOENT: no such file or directory, open '/app/librechat.yaml'"
 每次和LibreChat的官方代码库同步时 librechat.yaml 中的 version 需要改成 https://www.librechat.ai/changelog 中最新的
+docker-compose.yml中的mongodb暂时用不到所以注释掉
